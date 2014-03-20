@@ -32,3 +32,26 @@ sh scriptname
 ./scriptname
 ```
 注意：使用sh scriptname来调用脚本的时候将会关闭一些Bash特定的扩展, 脚本可能因此 而调用失败
+
+###*2014-03-20*
+
+时间格式化
+```
+date +"%m-%d-%y"  03-20-14
+date +"%D"        03/20/14
+date +"%T"        10:12:23
+date +"%D %T"     03/20/14 10:12:23
+```
+保存时间到变量中
+```
+NOW=$(date +"%m-%d-%Y")
+
+#完整的例子
+#!/bin/bash
+NOW=$(date +"%m-%d-%Y")
+FILE="backup.$NOW.tar.gz"
+echo "Backing up data to /nas42/backup.$NOW.tar.gz file, please wait..."
+#rest of code
+```
+####参考
+- http://www.cyberciti.biz/faq/linux-unix-formatting-dates-for-display/
