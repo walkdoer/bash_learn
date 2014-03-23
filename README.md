@@ -2,6 +2,7 @@ BASH学习
 ======================
 
 ###*2014-03-19*
+
 声明变量的=号不能有空格  
 if 逻辑语句[]内部必须有空格
 ```shell
@@ -55,3 +56,21 @@ echo "Backing up data to /nas42/backup.$NOW.tar.gz file, please wait..."
 ```
 ####参考
 - http://www.cyberciti.biz/faq/linux-unix-formatting-dates-for-display/
+
+###*2014-03-23*
+
+####参数
+
+- $1 表示第一个参数，依次類推，$2表示第二個參數
+- $# 表示最後一個參數的座標
+- ${!#} 表示最後一個參數
+- $@ 所有的參數，$*也可以，兩者有區別 [參考](http://www.ibm.com/developerworks/cn/linux/l-bash-parameters.html)
+``` shell
+
+./example.sh param1, param2, param3
+
+# $1 : param1
+# $2 : param2
+# $3 : param3
+
+```
