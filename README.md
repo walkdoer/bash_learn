@@ -65,12 +65,24 @@ echo "Backing up data to /nas42/backup.$NOW.tar.gz file, please wait..."
 - $# 表示最後一個參數的座標
 - ${!#} 表示最後一個參數
 - $@ 所有的參數，$*也可以，兩者有區別 [參考](http://www.ibm.com/developerworks/cn/linux/l-bash-parameters.html)
-``` shell
+
+```shell
 
 ./example.sh param1, param2, param3
-
 # $1 : param1
 # $2 : param2
 # $3 : param3
 
+```
+
+####什麼是内建命令?
+內建命令指的就是包含在Bash工具包中的命令, 从字面意思上看就是built in. 这主要是考虑到执行效 率的问题 -- 内建命令将比外部命令执行的更快, 一部分原因是因为外部命令通常都需要fork出一个单 独的进程来执行 -- 另一部分原因是特定的内建命令需要直接访问shell的内核部分
+
+#### 弱引用和強引用的區別？
+被一对双引号(" ")括起来的变量替换是不会被阻止的. 所以双引号被称为部分引用, 有时候又 被称为"弱引用". 但是如果使用单引号的话(' '), 那么变量替换就会被禁止了, 变量名只会被 解释成字面的意思, 不会发生变量替换. 所以单引号被称为全引用, 有时候也被称为"强引用".
+
+``` shell
+MSG = 'abc'
+echo '強引用：$MSG' # 打印出： 強引用：$MSG
+echo "弱引用：$MSG" # 打印出： 弱引用：abc
 ```
