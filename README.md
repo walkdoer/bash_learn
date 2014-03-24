@@ -86,3 +86,6 @@ MSG = 'abc'
 echo '強引用：$MSG' # 打印出： 強引用：$MSG
 echo "弱引用：$MSG" # 打印出： 弱引用：abc
 ```
+
+####参考
+1. [Linux 技巧: Bash 参数和参数扩展](http://www.ibm.com/developerworks/cn/linux/l-bash-parameters.html)

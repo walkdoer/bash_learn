@@ -1,5 +1,8 @@
 #!/bin/bash
 # 如果没有文件
+script_name=`basename $0`
+echo "腳本名稱:$0"
+echo "腳本的文件名:$script_name"
 filename="$1"
 
 echo '測試$filename'
