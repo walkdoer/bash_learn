@@ -108,9 +108,17 @@ exit $? #退出码由最后一条命令决定
 
 #### 条件测试
 if/then结构用来判断命令列表的退出状态码是否为0(因为在UNIX惯例, 0表示"成功"), 如果成 功的话, 那么就执行接下来的一个或多个命令
-##### ` [ ` 和 ` [[ `的区别?
-` [ ` 这是一个内建命令,效率更高，与测试(test)命令等价 这个命令把它的参数作为比较表达式或者作为文件测试, 并且根据比较的结 果来返回一个退出状态码(0 表示真, 1表示假).
-` [[ ` 表示扩展测试，注意:[[是一个关键字, 并不是一个命令
+##### `test` , ` [ ` 和 ` [[ `的区别?
+if test condition-true结构与if [ condition-true ]完全相同.
+```
+➜  type [
+[ is a shell builtin
+➜   type test
+test is a shell builtin
+```
+` [ ` 这是一个内建命令,效率更高，与测试(test)命令等价 这个命令把它的参数作为比较表达式或者作为文件测试, 并且根据比较的结果来返回一个退出状态码(0 表示真, 1表示假).
+` [[ ` 表示扩展测试，注意:[[是一个关键字, 并不是一个命令, `[[ ]]`结构比`[ ]`结构更加通用. 这是一个扩展的test命令, 是从ksh88中引进的.在[[和]]之间所有的字符都不会发生文件名扩展或者单词分割, 但是会发生参数扩展和命令替换
+使用`[[ ... ]]`条件判断结构, 而不是`[ ... ]`, 能够防止脚本中的许多逻辑错误. 比如, &&, ||, <, 和> 操作符能够正常存在于`[[ ]]`条件判断结构中, 但是如果出现在`[ ]`结构中的话, 会报错.
 
 ```
 # 条件测试
@@ -126,16 +134,21 @@ if [ -x "$filename" ]; then
 ```
 ##### if-grep用法
 ```
- if grep -q Bash file
- then echo "File contains at least one occurrence of Bash."
- fi 11
- word=Linux
- letter_sequence=inu
- if echo "$word" | grep -q "$letter_sequence"
- # "-q" 选项是用来禁止输出的.
- then
- echo "$letter_sequence found in $word"
- else
- echo "$letter_sequence not found in $word"
- fi
+if grep -q Bash file
+then echo "File contains at least one occurrence of Bash."
+fi
+```
+##### elif else if的缩写
+```
+if [ condition ]
+then
+    command1
+    command2
+    command3
+elif [ condition2 ]
+    command4
+    command5
+else
+    default-command
+fi
 ```
