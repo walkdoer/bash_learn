@@ -85,7 +85,20 @@ echo "Backing up data to /nas42/backup.$NOW.tar.gz file, please wait..."
 MSG = 'abc'
 echo '強引用：$MSG' # 打印出： 強引用：$MSG
 echo "弱引用：$MSG" # 打印出： 弱引用：abc
+echo "\$MSG" #\可以阻止对变量的应用
 ```
 
 ####参考
 1. [Linux 技巧: Bash 参数和参数扩展](http://www.ibm.com/developerworks/cn/linux/l-bash-parameters.html)
+
+###*2014-04-07*
+exit 被用来结束一个脚本, 就像在C语言中一样. 它也返回一个值, 并且这个值会传递给脚本的父进 程, 父进程会使用这个值做下一步的处理.  每个命令都会返回一个 退出状态码 (有时候也被称为 返回状态 ). 成功的命令返回0, 而不成功的命 令返回非零值, 非零值通常都被解释成一个错误码. 行为良好的UNIX命令, 程序, 和工具都会返回0作 为退出码来表示成功, 虽然偶尔也会有例外
+
+`$?`保存了最后所执行的命令的退出状态码.例如
+
+```
+#...Lots of Command
+COMMAND_LAST
+exit $? #退出码由最后一条命令决定
+```
+
