@@ -184,3 +184,44 @@ echo "(( 5 > 9 ))的退出状态码: $?" # 1
 (( a-- ))
 (( t = a<45?7:11)) # C语言风格的3元操作符
 ```
+
+#### 文件测试操作符
+* -e 文件存在
+* -f 表示这个文件是一个一般文件(并不是目录或者设备文件)
+* -s 文件大小不为0
+* -d 这是一个目录
+* -b 这是一个块设备
+* -c 这是一个字符设备
+* -p 这是一个管道
+* -h 这是一个符号链接（软链接）
+* -S 这是一个socket
+* -r 是否可读
+* -w 是否可写
+* -x 是否可执行
+* f1 -nt f2 文件f1比f2新
+* f1 -ot f2 文件f1比f2旧
+* f1 -ef -f2 文件f1和f2是相同文件的硬链接
+```
+# 一个纯粹的shell 脚本用来找出那些断掉的符号链接文件并且输出它们所指向的文件
+
+[ $# -eq 0 ] && directorys=`pwd` || directorys=$@
+
+linkchk () {
+    for element in $1/*; do
+    #'-h'用来测试符号链接, '-d'用来测试目录.
+    [ -h "$element" -a ! -e "$element" ] && echo \"$element\"
+    [ -d "$element" ] && linkchk $element
+    done
+}
+
+for directory in $directorys; do
+    if [ -d $directory ]
+    then linkchk $directory
+    else
+        echo "$directory is not a directory"
+        echo "Usage: $0 dir1 dir2 ..."
+    fi
+done
+
+exit 0
+```
