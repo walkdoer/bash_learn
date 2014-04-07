@@ -92,10 +92,10 @@ echo "弱引用：$MSG" # 打印出： 弱引用：abc
 echo "\$MSG" #\可以阻止对变量的应用
 ```
 
-####参考
+#### 参考
 1. [Linux 技巧: Bash 参数和参数扩展](http://www.ibm.com/developerworks/cn/linux/l-bash-parameters.html)
 
-###*2014-04-07*
+### *2014-04-07*
 exit 被用来结束一个脚本, 就像在C语言中一样. 它也返回一个值, 并且这个值会传递给脚本的父进 程, 父进程会使用这个值做下一步的处理.  每个命令都会返回一个 退出状态码 (有时候也被称为 返回状态 ). 成功的命令返回0, 而不成功的命 令返回非零值, 非零值通常都被解释成一个错误码. 行为良好的UNIX命令, 程序, 和工具都会返回0作 为退出码来表示成功, 虽然偶尔也会有例外
 
 `$?`保存了最后所执行的命令的退出状态码.例如
@@ -106,3 +106,36 @@ COMMAND_LAST
 exit $? #退出码由最后一条命令决定
 ```
 
+#### 条件测试
+if/then结构用来判断命令列表的退出状态码是否为0(因为在UNIX惯例, 0表示"成功"), 如果成 功的话, 那么就执行接下来的一个或多个命令
+##### ` [ ` 和 ` [[ `的区别?
+` [ ` 这是一个内建命令,效率更高，与测试(test)命令等价 这个命令把它的参数作为比较表达式或者作为文件测试, 并且根据比较的结 果来返回一个退出状态码(0 表示真, 1表示假).
+` [[ ` 表示扩展测试，注意:[[是一个关键字, 并不是一个命令
+
+```
+# 条件测试
+if cmp a b &> /dev/null # 禁止输出.
+then echo "Files a and b are identical."
+else echo "Files a and b differ."
+fi
+# [ 条件测试
+
+如果if和then在条件判断的同一行上的话, 必须使用分号来结束if表达式. if和then都 是关键字. 关键字(或者命令)如果作为表达式的开头, 并且如果想在同一行上再写一个新 的表达式的话, 那么必须使用分号来结束上一句表达式.
+```
+if [ -x "$filename" ]; then
+```
+##### if-grep用法
+```
+ if grep -q Bash file
+ then echo "File contains at least one occurrence of Bash."
+ fi 11
+ word=Linux
+ letter_sequence=inu
+ if echo "$word" | grep -q "$letter_sequence"
+ # "-q" 选项是用来禁止输出的.
+ then
+ echo "$letter_sequence found in $word"
+ else
+ echo "$letter_sequence not found in $word"
+ fi
+```
