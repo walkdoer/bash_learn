@@ -122,32 +122,36 @@ test is a shell builtin
 file=/etc/passwd
 if [[ -e $file ]]
 then
-    ehco "Password file exists."
+    echo "Password file exists."
 fi
 ```
 使用`[[ ... ]]`条件判断结构, 而不是`[ ... ]`, 能够防止脚本中的许多逻辑错误. 比如, &&, ||, <, 和> 操作符能够正常存在于`[[ ]]`条件判断结构中, 但是如果出现在`[ ]`结构中的话, 会报错.
 
-```
-#####if COMMAND
+##### if COMMAND
 在if后面也不一定非得是test命令或者是用于条件判断的中括号结构( `[ ]` 或 `[[ ]]` ),`if COMMAND`结构将会返回COMMAND的退出状态码
 
-# 条件测试
+```
 if cmp a b &> /dev/null # 禁止输出.
 then echo "Files a and b are identical."
 else echo "Files a and b differ."
 fi
 ```
+
 如果if和then在条件判断的同一行上的话, 必须使用分号来结束if表达式. if和then都 是关键字. 关键字(或者命令)如果作为表达式的开头, 并且如果想在同一行上再写一个新 的表达式的话, 那么必须使用分号来结束上一句表达式.
+
 ```
 if [ -x "$filename" ]; then
 ```
+
 ##### if-grep用法
+
 ```
 if grep -q Bash file
 then echo "File contains at least one occurrence of Bash."
 fi
 ```
 ##### elif else if的缩写
+
 ```
 if [ condition ]
 then
@@ -160,4 +164,23 @@ elif [ condition2 ]
 else
     default-command
 fi
+```
+##### `(( ))` 结构
+计算一个算术表达式的值. 如果表达式的结果为0, 那么返回的退出状态码为1, 或者 是"假". 而一个非零值的表达式所返回的退出状态码将为0,  ((...))结构允许*算术扩展*和*赋值*. 举个简单的例子, a=$(( 5 + 3 )), 将把变量"a"设为"5 + 3", 或者8. 然而, 双圆括号结构也被认为是在Bash中使用C语言风格变量操作的一种处理机制.
+
+```
+# 返回退出状态码
+(( 0 ))
+echo "(( 0 ))的退出状态码: $?" # 1
+(( 1 ))
+echo "(( 1 ))的退出状态码: $?" # 0
+(( 5 > 4 ))
+echo "(( 5 > 4 ))的退出状态码: $?" # 0
+(( 5 > 9 ))
+echo "(( 5 > 9 ))的退出状态码: $?" # 1
+# 计算
+(( a = 23 ))  # = 两边允许有空格
+(( a++ ))
+(( a-- ))
+(( t = a<45?7:11)) # C语言风格的3元操作符
 ```
