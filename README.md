@@ -227,3 +227,34 @@ done
 
 exit 0
 ```
+
+#### 检查字符串是否为null
+```bash
+if [ -n $str ]
+then
+    echo "String str is not null"
+else
+    echo "String str is null"
+fi
+# 输出 String str is not null
+
+
+if [ -n "$str" ]
+then
+    echo "String str is not null"
+else
+    echo "String str is null"
+fi
+# 输出 String str is null
+
+if [ $str ] #最好使用 if [ "$str" ]
+then
+    echo "String str is not null"
+else
+    echo "String str is null"
+fi
+# 输出 String str is null
+`
+
+```
+

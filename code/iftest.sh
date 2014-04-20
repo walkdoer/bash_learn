@@ -81,3 +81,33 @@ echo "(( 5 > 9 ))的退出状态码: $?" # 0
 
 (( 1 / 0 )) 2>/dev/null # 如果删除 2>/dev/null 会提示错误:division by 0 (error token is " ")
 echo "(( 1 / 0 ))的退出状态吗: $?" #1
+
+home=/home/bozo
+[ -d "$home" ] || echo "$home directory does not exist."
+
+
+if [ -n $str ]
+then
+    echo "String str is not null"
+else
+    echo "String str is null"
+fi
+# 输出 String str is not null
+
+
+if [ -n "$str" ]
+then
+    echo "String str is not null"
+else
+    echo "String str is null"
+fi
+
+# 输出 String str is null
+
+str=initialized
+if [ $str ]
+then
+    echo "String is not null"
+else
+    echo "String is null"
+fi
