@@ -21,4 +21,18 @@ fi
 
 echo
 
-exit 0
+
+if [ -n "$string" ]
+then
+    echo "String \"string1\" is not null"
+else
+    echo "String \"string\" is null"
+fi
+
+
+if [ "String1" ] # 也可以使用 if [ $string1 ]
+then
+    echo "String \"string1\" is not null"
+else
+    echo "String \"string\" is null"
+fi

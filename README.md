@@ -5,6 +5,34 @@ BASH学习
 
 - 操作符详细见 `Operator.md`
 
+*2014-08-11*
+=================
+
+检查字符串是否为null
+
+`-z`: 字符串为null
+`-n`: 字符串不为null
+
+```bash
+#第一种方法
+if [ -n "$string" ]
+then
+    echo "String \"string1\" is not null"
+else
+    echo "String \"string\" is null"
+fi
+
+#更简单的方式
+if [ "String1" ] # 也可以使用 if [ $string1 ]
+then
+    echo "String \"string1\" is not null"
+else
+    echo "String \"string\" is null"
+fi
+
+```
+
+
 *2014-08-06*
 =================================
 
@@ -40,8 +68,6 @@ if [[ "$a" < "$b" ]]
 if [ "$a" \< "$b" ]
 ```
 
-`-z`: 字符串为null
-`-n`: 字符串不为null
 
 #### -a,-o 与 &&,||
 
