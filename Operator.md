@@ -6,3 +6,15 @@
 ! true
 !true  #Command not found
 ```
+
+### `[ ]` 运算符记得要带空格，不带空格会报错
+
+```bash
+if ["$a" -ne "$b"] # Wrong
+then
+    echo "$a is not equal to $b"
+    echo "算术比较"
+else
+    echo "same"
+fi
+```
