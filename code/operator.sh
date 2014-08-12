@@ -22,7 +22,7 @@ fi
 echo
 
 
-if [ -n "$string" ]
+if [ -n "$string1" ]
 then
     echo "String \"string1\" is not null"
 else
@@ -30,9 +30,21 @@ else
 fi
 
 
-if [ "String1" ] # 也可以使用 if [ $string1 ]
+if [ "$string1" ] # 也可以使用 if [ $string1 ]
 then
     echo "String \"string1\" is not null"
 else
     echo "String \"string\" is null"
 fi
+
+
+string1="a = b"
+
+if [ $string1 ] 
+then
+    echo "String \"string1\" is not null"
+else
+    echo "String \"string\" is null"
+fi
+
+# 上例输出 String string1 is null; 机智！

@@ -8,7 +8,7 @@ BASH学习
 *2014-08-11*
 =================
 
-检查字符串是否为null
+#### 检查字符串是否为null
 
 `-z`: 字符串为null
 `-n`: 字符串不为null
@@ -23,7 +23,7 @@ else
 fi
 
 #更简单的方式
-if [ "String1" ] # 也可以使用 if [ $string1 ]
+if [ "$string1" ] # 也可以使用 if [ $string1 ]
 then
     echo "String \"string1\" is not null"
 else
