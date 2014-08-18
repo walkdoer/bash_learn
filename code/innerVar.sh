@@ -38,3 +38,5 @@ echo "------"
 IFS=","
 var="a,b,c"
 output_args_one_per_line $var
+
+echo "进程:$$"
