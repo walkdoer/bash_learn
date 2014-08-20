@@ -5,17 +5,49 @@ BASH学习
 
 - 操作符详细见 `Operator.md`
 
+*2014-08-20*
+================
+
+```
+while [ "$SECONDS" -le "$TIME_LIMIT" ]
+do
+    if [ "$SECONDS" -eq 1 ]
+    then
+        units=second
+    else
+        units=seconds
+    fi
+
+    echo "This script has been running $SECONDS $units."
+
+    sleep $INTERVA
+done
+echo -e "\a" #Beep
+
+```
+
+
+从下面这段脚本学到的知识点
+
+$SECONDS : 当前脚本运行的时间
+echo -e 可是输出 `\a`  之类带斜杠的字符,不加e参数，则直接输出 \a  [参考](http://ss64.com/bash/echo.html)
+
+
 *2014-08-15*
 ================
 
 ### 内在变量
-
+$$ 脚本进程ID
+$! 最后一个进程ID
+$# 位置参数个数
+${#*} 命令行参数个数
 $FUNCNAME 当前函数的名字
 $GROUPS
 $HOME
 $HOSTNAME
 $HOSTTYPE
 $IFS $IFS是一个非常有用的常量，查看code中的实例
+
 
 查看 `./code/innerVar.sh`
 

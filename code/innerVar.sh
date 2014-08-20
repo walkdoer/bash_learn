@@ -40,3 +40,13 @@ var="a,b,c"
 output_args_one_per_line $var
 
 echo "进程:$$"
+
+
+#mecho ()
+#{
+    #echo "$1, $2, $3"
+#}
+
+#IFS=""
+#set a b c
+
